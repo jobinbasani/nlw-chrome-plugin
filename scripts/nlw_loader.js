@@ -1,8 +1,10 @@
 var holidayNames = {
-    "Australia":["newYear","australiaDay","canberraDay"],
+    "Australia":["newYear","australiaDay","canberraDay","goodFriday","easterSaturday","easterMondayAus","anzacDay","queensBirthday",
+                "labourDayAus","christmas","boxingDay"],
     "Canada" : ["newYear","familyDayBc","familyDay","goodFriday","easterMondayCanada","victoriaDay","canadaDay",
                 "civicHoliday","labourDayCanada","thanksgivingCanada","remembranceDay","christmas","boxingDayCanada"],
-    "UK" : ["newYear","mlkDay"],
+    "UK" : ["newYear","goodFriday","easterMondayUk","mayDayHoliday","springBankHoliday","summerBankHolidayFirst","summerBankHolidayLast",
+           "halloween","guyFawkesDay","christmas","boxingDay"],
     "USA" : ["newYear","mlkDay"]
     },
     countryData = {};
@@ -251,5 +253,126 @@ LongWeekend.prototype.canberraDay = function(year){
         "A public holiday held annually on the second Monday in March in the Australian Capital Territory (ACT) to celebrate the official naming of Canberra. Observed in Australian Capital Territory.",
         "https://en.wikipedia.org/wiki/Canberra_Day",
         Date.parse('March 1st '+year).second().monday()
+    );
+};
+
+LongWeekend.prototype.easterSaturday = function(year){
+    return new Holiday(
+        "Easter Saturday",
+        "Easter Saturday, or Bright Saturday, on the Christian calendar is the Saturday following the festival of Easter, the Saturday of Easter or Bright Week.",
+        "https://en.wikipedia.org/wiki/Easter_Saturday",
+        this.easter(year).addDays(-1)
+    );
+};
+
+LongWeekend.prototype.easterMondayAus = function(year){
+    return new Holiday(
+        "Easter Monday",
+        "Easter Monday in the Roman Catholic liturgical calendar is the second day of the octave of Easter Week and analogously in the Eastern Orthodox Church is the second day of Bright Week.",
+        "https://en.wikipedia.org/wiki/Easter_Monday",
+        this.easter(year).addDays(1)
+    );
+};
+
+LongWeekend.prototype.anzacDay = function(year){
+    return new Holiday(
+        "ANZAC Day",
+        "A national day of remembrance in Australia and New Zealand that broadly commemorates all Australians and New Zealanders who served and died in all wars, conflicts, and peacekeeping operations and the contribution and suffering of all those who have served.",
+        "https://en.wikipedia.org/wiki/Anzac_Day",
+        Date.parse('April 25th '+year)
+    );
+};
+
+LongWeekend.prototype.queensBirthday = function(year){
+    return new Holiday(
+        "Queens Birthday",
+        "The selected day on which the birthday of the monarch of the Commonwealth realms (currently Queen Elizabeth II) is officially celebrated",
+        "https://en.wikipedia.org/wiki/Queen%27s_Official_Birthday",
+        Date.parse('June 1st '+year).second().monday()
+    );
+};
+
+LongWeekend.prototype.labourDayAus = function(year){
+    return new Holiday(
+        "Labour Day",
+        "Annual holiday to celebrate the achievements of workers. Observed in Australian Capital Territory, New South Wales and South Australia.",
+        "https://en.wikipedia.org/wiki/Labour_Day",
+        Date.parse('October 1st '+year).first().monday()
+    );
+};
+
+LongWeekend.prototype.boxingDay = function(year){
+    var boxingDay = Date.parse('December 26th '+year);
+    if(boxingDay.is().sunday()){
+     boxingDay = boxingDay.addDays(1);   
+    }
+    return new Holiday(
+        "Boxing Day",
+        "Boxing Day is a holiday traditionally celebrated the day following Christmas Day",
+        "http://en.wikipedia.org/wiki/Boxing_Day",
+        boxingDay
+    );
+};
+
+LongWeekend.prototype.easterMondayUk = function(year){
+    return new Holiday(
+        "Easter Monday",
+        "Easter Monday in the Roman Catholic liturgical calendar is the second day of the octave of Easter Week and analogously in the Eastern Orthodox Church is the second day of Bright Week.Observed in England, Northern Ireland and Wales.",
+        "https://en.wikipedia.org/wiki/Easter_Monday",
+        this.easter(year).next().monday()
+    );
+};
+
+LongWeekend.prototype.mayDayHoliday = function(year){
+    return new Holiday(
+        "May Day Holiday",
+        "A traditional spring holiday and coincides with International Workers' Day",
+        "https://en.wikipedia.org/wiki/Labour_Day",
+        Date.parse('May 1st '+year).first().monday()
+    );
+};
+
+LongWeekend.prototype.springBankHoliday = function(year){
+    return new Holiday(
+        "Spring Bank Holiday",
+        "Last Monday in May",
+        "http://en.wikipedia.org/wiki/Bank_holiday",
+        Date.parse('May 1st '+year).final().monday()
+    );
+};
+
+LongWeekend.prototype.summerBankHolidayFirst = function(year){
+    return new Holiday(
+        "Summer Bank Holiday",
+        "First Monday in August. Observed in Scotland.",
+        "http://en.wikipedia.org/wiki/Bank_holiday",
+        Date.parse('August 1st '+year).first().monday()
+    );
+};
+
+LongWeekend.prototype.summerBankHolidayLast = function(year){
+    return new Holiday(
+        "Summer Bank Holiday",
+        "Last Monday in August. Observed in England, Northern Ireland and Wales.",
+        "http://en.wikipedia.org/wiki/Bank_holiday",
+        Date.parse('August 1st '+year).final().monday()
+    );
+};
+
+LongWeekend.prototype.halloween = function(year){
+    return new Holiday(
+        "Halloween",
+        "A yearly celebration on 31 October, the eve of the Western Christian feast of All Hallows' Day",
+        "http://en.wikipedia.org/wiki/Halloween",
+        Date.parse('October 31st '+year)
+    );
+};
+
+LongWeekend.prototype.guyFawkesDay = function(year){
+    return new Holiday(
+        "Guy Fawkes Day",
+        "Guy Fawkes Day, also known as Guy Fawkes Night, Bonfire Night and Firework Night, is an annual commemoration observed on 5 November",
+        "http://en.wikipedia.org/wiki/Guy_Fawkes_Night",
+        Date.parse('November 5th '+year)
     );
 };

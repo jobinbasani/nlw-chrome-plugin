@@ -64,8 +64,19 @@ LongWeekend.prototype.getNextLongWeekend = function(){
  if(this.holidays.length == 0){
      console.log('loading data...');
      this.loadLongWeekends();
+     this.holidays.sort(function(a,b){
+        return a.date.isBefore(b.date)?-1:1;
+     });
  }
-    console.log(this.holidays);
+    var today = Date.today(), nlw;
+    for(var i=0;i<this.holidays.length;i++){
+     if(this.holidays[i].date.isAfter(today)){
+         nlw = this.holidays[i];
+         break;
+     }
+    }
+    console.log(nlw);
+    return nlw;
 }
 
 LongWeekend.prototype.loadLongWeekends = function(){

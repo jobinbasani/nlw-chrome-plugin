@@ -5,7 +5,8 @@ var holidayNames = {
                 "civicHoliday","labourDayCanada","thanksgivingCanada","remembranceDay","christmas","boxingDayCanada"],
     "UK" : ["newYear","goodFriday","easterMondayUk","mayDayHoliday","springBankHoliday","summerBankHolidayFirst","summerBankHolidayLast",
            "halloween","guyFawkesDay","christmas","boxingDay"],
-    "USA" : ["newYear","mlkDay"]
+    "USA" : ["newYear","mlkDay","washingtonDay","memorialDayUsa","independenceDayUsa","laborDayUsa","columbusDay","veteransDay",
+            "thanksgivingUsa","christmas"]
     },
     countryData = {};
 var $ = function(id) {
@@ -374,5 +375,75 @@ LongWeekend.prototype.guyFawkesDay = function(year){
         "Guy Fawkes Day, also known as Guy Fawkes Night, Bonfire Night and Firework Night, is an annual commemoration observed on 5 November",
         "http://en.wikipedia.org/wiki/Guy_Fawkes_Night",
         Date.parse('November 5th '+year)
+    );
+};
+
+LongWeekend.prototype.washingtonDay = function(year){
+    return new Holiday(
+        "Washington's Birthday",
+        "A United States federal holiday celebrated on the third Monday of February in honor of George Washington, the first President of the United States.",
+        "https://en.wikipedia.org/wiki/Washington%27s_Birthday",
+        Date.parse('February 1st '+year).third().monday()
+    );
+};
+
+LongWeekend.prototype.memorialDayUsa = function(year){
+    return new Holiday(
+        "Memorial Day",
+        "A day of remembering the men and women who died while serving in the United States Armed Forces",
+        "http://en.wikipedia.org/wiki/Memorial_Day",
+        Date.parse('May 1st '+year).final().monday()
+    );
+};
+
+LongWeekend.prototype.independenceDayUsa = function(year){
+    var july4 = Date.parse('July 4th '+year),
+        text='';
+    if(july4.is().saturday()){
+        text = "July 4 being Saturday, holiday will be on July 3"
+    }else if(july4.is().sunday()){
+        text = "July 4 being Sunday, holiday will be on July 5"
+    }
+    return new Holiday(
+        "Independence Day",
+        "Commemorating the adoption of the Declaration of Independence on July 4, 1776, declaring independence from the Kingdom of Great Britain."+text,
+        "http://en.wikipedia.org/wiki/Independence_Day_(United_States)",
+        july4
+    );
+};
+
+LongWeekend.prototype.laborDayUsa = function(year){
+    return new Holiday(
+        "Labor Day",
+        "A celebration of the American labor movement and is dedicated to the social and economic achievements of workers",
+        "https://en.wikipedia.org/wiki/Labor_Day",
+        Date.parse('September 1st '+year).first().monday()
+    );
+};
+
+LongWeekend.prototype.columbusDay = function(year){
+    return new Holiday(
+        "Columbus Day",
+        "The anniversary of Christopher Columbus' arrival in the Americas, which happened on October 12, 1492",
+        "http://en.wikipedia.org/wiki/Columbus_Day",
+        Date.parse('October 1st '+year).second().monday()
+    );
+};
+
+LongWeekend.prototype.veteransDay = function(year){
+    return new Holiday(
+        "Veterans Day",
+        "Honors people who have served in the U.S. Armed Forces, also known as veterans",
+        "http://en.wikipedia.org/wiki/Veterans_Day",
+        Date.parse('November 11th '+year)
+    );
+};
+
+LongWeekend.prototype.thanksgivingUsa = function(year){
+    return new Holiday(
+        "Thanksgiving Day",
+        "A day of giving thanks for the blessing of the harvest and of the preceding year",
+        "http://en.wikipedia.org/wiki/Thanksgiving",
+        Date.parse('November 1st '+year).fourth().thursday()
     );
 };

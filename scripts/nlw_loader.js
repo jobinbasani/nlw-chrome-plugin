@@ -43,7 +43,12 @@ function onCountryChange(){
 }
 
 function showLongWeekendForCountry(country){
-    countryData[country].getNextLongWeekend.call(countryData[country]);
+    var nlw = countryData[country].getNextLongWeekend.call(countryData[country]);
+    var holidayDate = nlw.date;
+    $("holidayName").innerHTML = nlw.holidayName;
+    $("nlwDescription").innerHTML = nlw.description;
+    $("monthYear").innerHTML = holidayDate.toString("MMMM yyyy");
+    $("dateBox").innerHTML = holidayDate.toString("dd");
 }
 
 function LongWeekend(holidayList){
@@ -62,7 +67,6 @@ function Holiday(holidayName, description, link, date){
 
 LongWeekend.prototype.getNextLongWeekend = function(){
  if(this.holidays.length == 0){
-     console.log('loading data...');
      this.loadLongWeekends();
      this.holidays.sort(function(a,b){
         return a.date.isBefore(b.date)?-1:1;
@@ -75,7 +79,6 @@ LongWeekend.prototype.getNextLongWeekend = function(){
          break;
      }
     }
-    console.log(nlw);
     return nlw;
 }
 

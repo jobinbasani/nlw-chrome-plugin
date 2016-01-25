@@ -43,12 +43,14 @@ function onCountryChange(){
 }
 
 function showLongWeekendForCountry(country){
-    var nlw = countryData[country].getNextLongWeekend.call(countryData[country]);
-    var holidayDate = nlw.date;
+    var nlw = countryData[country].getNextLongWeekend.call(countryData[country]),
+        holidayDate = nlw.date,
+        daysToGo = getDaysToGo(holidayDate);
     $("holidayName").innerHTML = nlw.holidayName;
     $("nlwDescription").innerHTML = nlw.description;
     $("monthYear").innerHTML = holidayDate.toString("MMMM yyyy");
     $("dateBox").innerHTML = holidayDate.toString("dd");
+    $("daysToGo").innerHTML = daysToGo + (daysToGo==1?" day ":" days ")+"to go!";
 }
 
 function LongWeekend(holidayList){
@@ -63,6 +65,10 @@ function Holiday(holidayName, description, link, date){
  this.description = description;
  this.link = link;
  this.date = date;
+}
+
+function getDaysToGo(holiday){
+ return Math.round((holiday.getTime()-Date.today().getTime())/(86400000));   
 }
 
 LongWeekend.prototype.getNextLongWeekend = function(){

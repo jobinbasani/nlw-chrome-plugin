@@ -33,7 +33,19 @@ function init(){
     countrySelect.innerHTML = options.join('');
     countrySelect.selectedIndex = index;
     countrySelect.onchange=onCountryChange;
+    $("upcomingBtn").onclick = switchTabs;
+    $("previousBtn").onclick = switchTabs;
     showLongWeekendForCountry(selectedCountry);
+}
+
+function switchTabs(){ 
+    if(this.classList.contains("inactive-tab")){
+        this.classList.remove("inactive-tab");
+        this.classList.add("active-tab");
+        var otherTab = $(this.id=="upcomingBtn"?"previousBtn":"upcomingBtn");
+        otherTab.classList.remove("active-tab");
+        otherTab.classList.add("inactive-tab");
+    }
 }
 
 function onCountryChange(){

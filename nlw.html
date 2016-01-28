@@ -103,7 +103,47 @@
       -webkit-box-shadow: inset 0 -.5px #e8930c;
       box-shadow: inset 0 -.5px #e8930c;
     }
-
+    .holidayTable {
+       display: table;
+       width: 100%;
+       table-layout: fixed;
+       margin-top: 12px;
+       border-collapse: collapse; 
+    }
+    .dateRow{
+     width: 15%;   
+    }
+    .holidayInfoRow{
+     width: 85%;   
+    }
+    td{
+        border-bottom:1px solid #F0F8FF;
+    }
+    .monthHeader{
+        background: #E74C3C;
+        padding: 5px;
+        text-align: center;
+    }
+    .alignTop{
+        vertical-align: top; 
+    }
+    .alignBottom{
+        vertical-align: bottom;
+    }
+    .date-header{
+        background: #3498DB;
+        padding: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 200%;
+    }
+    .holiday-info{
+        padding: 5px;
+        vertical-align: top;
+        text-align: left;
+        font-size: 90%;
+    }
+    
     </style>
 
     <!--
@@ -120,7 +160,7 @@
     <img id="image-result" hidden>
     <div id="nlwWrapper">
       <select id="countrySelect"></select>
-      <div class="nlwHeader" id="monthYear">fddf</div>
+      <div class="nlwHeader" id="monthYear"></div>
       <div id="dateBox"></div>
       <div class="nlwHeader" id="holidayName"></div>
       <div id="daysToGo"></div>    
@@ -135,6 +175,28 @@
     <div id="tableWrapper">
     <input id="upcomingBtn" type="submit" value="Upcoming" class="tab-button active-tab">
     <input id="previousBtn" type="submit" value="Previous" class="tab-button inactive-tab rightAlign">
+    <table id="holidayTable" class="holidayTable">
+        <tr id="row0">
+            <td class="dateRow">
+            <div class="monthHeader alignTop">Jan</div>
+            <div class="date-header">26</div>
+            <div class="monthHeader alignBottom">2016</div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div>holiday desc</div>
+            </td>
+        </tr>    
+        <tr id="row1">
+            <td class="dateRow">
+            <div class="monthHeader alignTop">Jan</div>
+            <div class="date-header">26</div>
+            <div class="monthHeader alignBottom">2016</div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div>holiday desc</div>
+            </td>
+        </tr>  
+    </table>
     </div>
   </body>
 </html>

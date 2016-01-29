@@ -20,6 +20,9 @@
         margin-left: 20px;
         margin-right: 20px;   
     }
+    .default-bottom-margin{
+     margin-bottom: 20px;   
+    }
       select {
         width: 100%; 
         font-size: 300%;
@@ -59,9 +62,22 @@
         vertical-align: middle;
         line-height: 100px;  
       }
-    .rightAlign{
+    .right-align{
         float: right;
         margin: 0px;
+    }
+    .half-width{
+     width: 50%;   
+    }
+    .tab-container{
+     width: 100%;   
+     white-space:nowrap;
+     margin-top: 15px;
+    }
+    .tab-container > div{
+     display:inline-block;
+     white-space:normal;
+     width:50%;
     }
     .orange-flat-button {
       position: relative;
@@ -130,25 +146,11 @@
        margin-top: 12px;
        border-collapse: collapse; 
     }
-    .tab-table {
-       display: table;
-       width: 100%;
-       table-layout: fixed;
-       margin-top: 20px;
-       margin-bottom: 10px;
-       border-collapse: collapse; 
-    }
-    .tab-cell{
-     width: 50%;   
-    }
     .dateRow{
      width: 15%;   
     }
     .holidayInfoRow{
      width: 85%;   
-    }
-    .td-no-border{
-        border-bottom:0px;
     }
     td{
         border-bottom:1px solid #F0F8FF;
@@ -177,6 +179,9 @@
         text-align: left;
         font-size: 90%;
     }
+    .hidden-container{
+     display: none;
+    }
     
     </style>
 
@@ -190,7 +195,7 @@
     <script src="scripts/nlw_loader.js"></script>
   </head>
   <body>
-    <div id="nlwWrapper" class="default-margin">
+    <div id="nlwWrapper" class="default-margin default-bottom-margin">
       <select id="countrySelect"></select>
       <div class="nlwHeader" id="monthYear"></div>
       <div id="dateBox"></div>
@@ -201,17 +206,15 @@
       <hr>
     <div>
         <input id="viewAll" type="submit" value="View All" class="orange-flat-button">
-        <input id="readMore" type="submit" value="Read More" class="orange-flat-button rightAlign">
+        <input id="readMore" type="submit" value="Read More" class="orange-flat-button right-align">
     </div>
     </div>
-    <div id="tableWrapper">
+    <div id="tableWrapper" class="hidden-container">
     <input id="listBackBtn" type="submit" value="Back" class="nav-button">
-    <table class="tab-table">
-    <tr>
-    <td class="tab-cell td-no-border"><input id="upcomingBtn" type="submit" value="Upcoming" class="tab-button active-tab"></td>    
-    <td class="tab-cell td-no-border"><input id="previousBtn" type="submit" value="Previous" class="tab-button inactive-tab rightAlign"></td>
-    </tr>    
-    </table>
+    <div class="tab-container">
+    <div><input id="upcomingBtn" type="submit" value="Upcoming" class="tab-button active-tab"></div>  
+    <div><input id="previousBtn" type="submit" value="Previous" class="tab-button inactive-tab"></div>
+    </div>
     <table id="holidayTable" class="holidayTable">
         <tr id="row0">
             <td class="dateRow">

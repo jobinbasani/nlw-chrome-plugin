@@ -35,7 +35,14 @@ function init(){
     countrySelect.onchange=onCountryChange;
     $("upcomingBtn").onclick = switchTabs;
     $("previousBtn").onclick = switchTabs;
+    $("viewAll").onclick = function(){swapView("nlwWrapper","tableWrapper");};
+    $("listBackBtn").onclick = function(){swapView("tableWrapper","nlwWrapper");};
     showLongWeekendForCountry(selectedCountry);
+}
+
+function swapView(currentView, newView){
+ $(currentView).style.display = 'none';
+ $(newView).style.display = 'block';
 }
 
 function switchTabs(){ 

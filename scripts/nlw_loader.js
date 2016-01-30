@@ -35,7 +35,7 @@ function init(){
     countrySelect.onchange=onCountryChange;
     $("upcomingBtn").onclick = switchTabs;
     $("previousBtn").onclick = switchTabs;
-    $("viewAll").onclick = function(){swapView("nlwWrapper","tableWrapper");};
+    $("viewAll").onclick = function(){switchTabs(true);swapView("nlwWrapper","tableWrapper");};
     $("listBackBtn").onclick = function(){swapView("tableWrapper","nlwWrapper");};
     showLongWeekendForCountry(selectedCountry);
 }
@@ -45,20 +45,52 @@ function swapView(currentView, newView){
  $(newView).style.display = 'block';
 }
 
-function switchTabs(){ 
-    if(this.classList.contains("inactive-tab")){
+function switchTabs(reset){ 
+    if(reset!=undefined && reset==true){
+        var upcoming = $("upcomingBtn"), previous = $("previousBtn");
+        upcoming.classList.remove("inactive-tab");
+        upcoming.classList.add("active-tab");
+        previous.classList.add("inactive-tab");
+        previous.classList.remove("active-tab");
+        loadListData('upcoming');
+    }else{
+        if(this.classList.contains("inactive-tab")){
         this.classList.remove("inactive-tab");
         this.classList.add("active-tab");
         var otherTab = $(this.id=="upcomingBtn"?"previousBtn":"upcomingBtn");
         otherTab.classList.remove("active-tab");
         otherTab.classList.add("inactive-tab");
+        }
     }
 }
 
 function onCountryChange(){
-    var selectedCountry = $("countrySelect").options[$("countrySelect").selectedIndex].innerHTML;
+    var selectedCountry = getSelectedCountry();
     localStorage.selectedCountry = selectedCountry;
     showLongWeekendForCountry(selectedCountry);
+}
+
+function getSelectedCountry(){
+    return $("countrySelect").options[$("countrySelect").selectedIndex].innerHTML;
+}
+
+function loadListData(listType){
+ var selectedCountry = getSelectedCountry(),
+     listTable = $("holidayTable"),
+     listData = listType=='upcoming'? countryData[selectedCountry].getUpcomingHolidays.call(countryData[selectedCountry])
+                :countryData[selectedCountry].getPreviousHolidays.call(countryData[selectedCountry]);
+    for(var i=0;i<listTable.rows.length;i++){
+     if(listData[i] === undefined){
+         listTable.rows[i].style.display = 'none';
+     }else{
+         listTable.rows[i].style.display = 'block';
+         $("monthHeader"+i).innerHTML = listData[i].date.toString('MMM');
+         $("dateHeader"+i).innerHTML = listData[i].date.toString('dd');
+         $("yearHeader"+i).innerHTML = listData[i].date.toString('yyyy');
+         $("holidayDescr"+i).innerHTML = listData[i].description;
+     }
+    }
+
 }
 
 function showLongWeekendForCountry(country){
@@ -77,6 +109,8 @@ function LongWeekend(holidayList){
  this.startDate = Date.today().addMonths(-6);
  this.endDate = Date.today().addMonths(6);
  this.holidays = [];
+ this.upcomingHolidays = [];
+ this.previousHolidays = [];
 }
 
 function Holiday(holidayName, description, link, date){
@@ -90,17 +124,48 @@ function getDaysToGo(holiday){
  return Math.round((holiday.getTime()-Date.today().getTime())/(86400000));   
 }
 
-LongWeekend.prototype.getNextLongWeekend = function(){
- if(this.holidays.length == 0){
+LongWeekend.prototype.getHolidays = function(){
+    if(this.holidays.length == 0){
      this.loadLongWeekends();
      this.holidays.sort(function(a,b){
         return a.date.isBefore(b.date)?-1:1;
      });
+    }
+    return this.holidays;
+}
+LongWeekend.prototype.getUpcomingHolidays = function(){
+    if(this.upcomingHolidays.length == 0){
+        this.loadSplitHolidays();
+    }
+    return this.upcomingHolidays;
+}
+
+LongWeekend.prototype.getPreviousHolidays = function(){
+    if(this.previousHolidays.length == 0){
+        this.loadSplitHolidays();
+    }
+    return this.previousHolidays;
+}
+
+LongWeekend.prototype.loadSplitHolidays = function(){
+    var today = Date.today();
+ for(var i=0;i<this.getHolidays().length;i++){
+  if(this.getHolidays()[i].date.isAfter(today)){
+      this.upcomingHolidays.push(this.getHolidays()[i]);
+  }else{
+      this.previousHolidays.push(this.getHolidays()[i]);
+  }
  }
+    this.previousHolidays.sort(function(a,b){
+        return a.date.isBefore(b.date)?1:-1;
+    });
+}
+
+LongWeekend.prototype.getNextLongWeekend = function(){
     var today = Date.today(), nlw;
-    for(var i=0;i<this.holidays.length;i++){
-     if(this.holidays[i].date.isAfter(today)){
-         nlw = this.holidays[i];
+    for(var i=0;i<this.getHolidays().length;i++){
+     if(this.getHolidays()[i].date.isAfter(today)){
+         nlw = this.getHolidays()[i];
          break;
      }
     }

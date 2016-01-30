@@ -1,9 +1,4 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
   <head>
     <title>Next Long Weekend</title>
@@ -125,7 +120,7 @@
       cursor: pointer;
       -webkit-box-shadow: inset 0 -2px #e8930c;
       box-shadow: inset 0 -2px #e8930c;
-      margin-top: 5px;
+      margin-top: 10px;
     }
     .active-tab{
       border: 0;
@@ -184,13 +179,6 @@
     }
     
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
     <script src="scripts/date.min.js"></script>
     <script src="scripts/nlw_loader.js"></script>
   </head>
@@ -216,36 +204,36 @@
     <div><input id="previousBtn" type="submit" value="Previous" class="tab-button inactive-tab"></div>
     </div>
     <table id="holidayTable" class="holidayTable">
-        <tr id="row0">
+        <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop">Jan</div>
-            <div class="date-header">26</div>
-            <div class="monthHeader alignBottom">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader0">Jan</div>
+            <div class="date-header" id="dateHeader0">26</div>
+            <div class="monthHeader alignBottom" id="yearHeader0">2016</div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div>holiday desc</div>
+            <div id="holidayDescr0">holiday desc</div>
             </td>
         </tr>    
-        <tr id="row1">
+        <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop">Jan</div>
-            <div class="date-header">26</div>
-            <div class="monthHeader alignBottom">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader1">Jan</div>
+            <div class="date-header" id="dateHeader1">26</div>
+            <div class="monthHeader alignBottom" id="yearHeader1">2016</div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div>holiday desc</div>
+            <div id="holidayDescr1">holiday desc</div>
             </td>
         </tr>  
-        <tr id="row2">
+        <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop">Jan</div>
-            <div class="date-header">26</div>
-            <div class="monthHeader alignBottom">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader2">Jan</div>
+            <div class="date-header" id="dateHeader2">26</div>
+            <div class="monthHeader alignBottom" id="yearHeader2">2016</div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div>holiday desc</div>
+            <div id="holidayDescr2">holiday desc</div>
             </td>
-        </tr> 
+        </tr>
     </table>
     </div>
   </body>

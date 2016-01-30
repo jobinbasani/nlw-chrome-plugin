@@ -46,22 +46,13 @@ function swapView(currentView, newView){
 }
 
 function switchTabs(reset){ 
-    if(reset!=undefined && reset==true){
-        var upcoming = $("upcomingBtn"), previous = $("previousBtn");
-        upcoming.classList.remove("inactive-tab");
-        upcoming.classList.add("active-tab");
-        previous.classList.add("inactive-tab");
-        previous.classList.remove("active-tab");
-        loadListData('upcoming');
-    }else{
-        if(this.classList.contains("inactive-tab")){
-        this.classList.remove("inactive-tab");
-        this.classList.add("active-tab");
-        var otherTab = $(this.id=="upcomingBtn"?"previousBtn":"upcomingBtn");
-        otherTab.classList.remove("active-tab");
-        otherTab.classList.add("inactive-tab");
-        }
-    }
+    var activeTab = reset==true?$("upcomingBtn"):this,
+        inactiveTab = reset==true?$("previousBtn"):$(this.id=="upcomingBtn"?"previousBtn":"upcomingBtn");
+    activeTab.classList.remove("inactive-tab");
+    activeTab.classList.add("active-tab");
+    inactiveTab.classList.add("inactive-tab");
+    inactiveTab.classList.remove("active-tab");
+    loadListData();
 }
 
 function onCountryChange(){
@@ -74,10 +65,11 @@ function getSelectedCountry(){
     return $("countrySelect").options[$("countrySelect").selectedIndex].innerHTML;
 }
 
-function loadListData(listType){
+function loadListData(){
  var selectedCountry = getSelectedCountry(),
      listTable = $("holidayTable"),
-     listData = listType=='upcoming'? countryData[selectedCountry].getUpcomingHolidays.call(countryData[selectedCountry])
+     listData = $("upcomingBtn").classList.contains("active-tab")
+                ?countryData[selectedCountry].getUpcomingHolidays.call(countryData[selectedCountry])
                 :countryData[selectedCountry].getPreviousHolidays.call(countryData[selectedCountry]);
     for(var i=0;i<listTable.rows.length;i++){
      if(listData[i] === undefined){

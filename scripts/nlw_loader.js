@@ -35,7 +35,7 @@ function init(){
     countrySelect.onchange=onCountryChange;
     $("upcomingBtn").onclick = switchTabs;
     $("previousBtn").onclick = switchTabs;
-    $("viewAll").onclick = function(){switchTabs(true);swapView("nlwWrapper","tableWrapper");};
+    $("viewAll").onclick = function(){switchTabs(true);swapView("nlwWrapper","tableWrapper");setListTitle();};
     $("listBackBtn").onclick = function(){swapView("tableWrapper","nlwWrapper");};
     showLongWeekendForCountry(selectedCountry);
 }
@@ -43,6 +43,10 @@ function init(){
 function swapView(currentView, newView){
  $(currentView).style.display = 'none';
  $(newView).style.display = 'block';
+}
+
+function setListTitle(){
+ $("weekendListTitle").innerHTML = getSelectedCountry()+" Weekends";   
 }
 
 function switchTabs(reset){ 
@@ -79,6 +83,7 @@ function loadListData(){
          $("monthHeader"+i).innerHTML = listData[i].date.toString('MMM');
          $("dateHeader"+i).innerHTML = listData[i].date.toString('dd');
          $("yearHeader"+i).innerHTML = listData[i].date.toString('yyyy');
+         $("holidayName"+i).innerHTML = listData[i].holidayName;
          $("holidayDescr"+i).innerHTML = listData[i].description;
      }
     }

@@ -177,6 +177,21 @@
     .hidden-container{
      display: none;
     }
+    .holiday-name{
+     font-size: 110%;
+     font-weight: bold;
+     margin-bottom: 5px;
+    }
+    .holiday-descr{
+     font-size: 90%;   
+    }
+    .weekend-list-header{
+        font-size: 120%; 
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;    
+        display: inline-block;
+    }
     
     </style>
     <script src="scripts/date.min.js"></script>
@@ -199,6 +214,7 @@
     </div>
     <div id="tableWrapper" class="hidden-container">
     <input id="listBackBtn" type="submit" value="Back" class="nav-button">
+    <span class="weekend-list-header" id="weekendListTitle"></span>
     <div class="tab-container">
     <div><input id="upcomingBtn" type="submit" value="Upcoming" class="tab-button active-tab"></div>  
     <div><input id="previousBtn" type="submit" value="Previous" class="tab-button inactive-tab"></div>
@@ -206,32 +222,145 @@
     <table id="holidayTable" class="holidayTable">
         <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop" id="monthHeader0">Jan</div>
-            <div class="date-header" id="dateHeader0">26</div>
-            <div class="monthHeader alignBottom" id="yearHeader0">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader0"></div>
+            <div class="date-header" id="dateHeader0"></div>
+            <div class="monthHeader alignBottom" id="yearHeader0"></div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div id="holidayDescr0">holiday desc</div>
+            <div id="holidayName0" class="holiday-name"></div>
+            <div id="holidayDescr0" class="holiday-descr"></div>
             </td>
         </tr>    
         <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop" id="monthHeader1">Jan</div>
-            <div class="date-header" id="dateHeader1">26</div>
-            <div class="monthHeader alignBottom" id="yearHeader1">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader1"></div>
+            <div class="date-header" id="dateHeader1"></div>
+            <div class="monthHeader alignBottom" id="yearHeader1"></div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div id="holidayDescr1">holiday desc</div>
+            <div id="holidayName1" class="holiday-name"></div>
+            <div id="holidayDescr1" class="holiday-descr"></div>
             </td>
         </tr>  
         <tr>
             <td class="dateRow">
-            <div class="monthHeader alignTop" id="monthHeader2">Jan</div>
-            <div class="date-header" id="dateHeader2">26</div>
-            <div class="monthHeader alignBottom" id="yearHeader2">2016</div>
+            <div class="monthHeader alignTop" id="monthHeader2"></div>
+            <div class="date-header" id="dateHeader2"></div>
+            <div class="monthHeader alignBottom" id="yearHeader2"></div>
             </td>
             <td class="holidayInfoRow holiday-info">
-            <div id="holidayDescr2">holiday desc</div>
+            <div id="holidayName2" class="holiday-name"></div>
+            <div id="holidayDescr2" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader3"></div>
+            <div class="date-header" id="dateHeader3"></div>
+            <div class="monthHeader alignBottom" id="yearHeader3"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName3" class="holiday-name"></div>
+            <div id="holidayDescr3" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader4"></div>
+            <div class="date-header" id="dateHeader4"></div>
+            <div class="monthHeader alignBottom" id="yearHeader4"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName4" class="holiday-name"></div>
+            <div id="holidayDescr4" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader5"></div>
+            <div class="date-header" id="dateHeader5"></div>
+            <div class="monthHeader alignBottom" id="yearHeader5"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName5" class="holiday-name"></div>
+            <div id="holidayDescr5" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader6"></div>
+            <div class="date-header" id="dateHeader6"></div>
+            <div class="monthHeader alignBottom" id="yearHeader6"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName6" class="holiday-name"></div>
+            <div id="holidayDescr6" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader7"></div>
+            <div class="date-header" id="dateHeader7"></div>
+            <div class="monthHeader alignBottom" id="yearHeader7"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName7" class="holiday-name"></div>
+            <div id="holidayDescr7" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader8"></div>
+            <div class="date-header" id="dateHeader8"></div>
+            <div class="monthHeader alignBottom" id="yearHeader8"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName8" class="holiday-name"></div>
+            <div id="holidayDescr8" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader9"></div>
+            <div class="date-header" id="dateHeader9"></div>
+            <div class="monthHeader alignBottom" id="yearHeader9"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName9" class="holiday-name"></div>
+            <div id="holidayDescr9" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader10"></div>
+            <div class="date-header" id="dateHeader10"></div>
+            <div class="monthHeader alignBottom" id="yearHeader10"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName10" class="holiday-name"></div>
+            <div id="holidayDescr10" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader11"></div>
+            <div class="date-header" id="dateHeader11"></div>
+            <div class="monthHeader alignBottom" id="yearHeader11"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName11" class="holiday-name"></div>
+            <div id="holidayDescr11" class="holiday-descr"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="dateRow">
+            <div class="monthHeader alignTop" id="monthHeader12"></div>
+            <div class="date-header" id="dateHeader12"></div>
+            <div class="monthHeader alignBottom" id="yearHeader12"></div>
+            </td>
+            <td class="holidayInfoRow holiday-info">
+            <div id="holidayName12" class="holiday-name"></div>
+            <div id="holidayDescr12" class="holiday-descr"></div>
             </td>
         </tr>
     </table>

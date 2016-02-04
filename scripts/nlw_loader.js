@@ -36,6 +36,7 @@ function init() {
     $("upcomingBtn").onclick = switchTabs;
     $("previousBtn").onclick = switchTabs;
     $("readMore").onclick = readMore;
+    $("openTab").onclick = openChromeTab;
     $("viewAll").onclick = function () {
         switchTabs(true);
         swapView("nlwWrapper", "tableWrapper");
@@ -75,6 +76,17 @@ function switchTabs(reset) {
     inactiveTab.classList.add("inactive-tab");
     inactiveTab.classList.remove("active-tab");
     loadListData();
+}
+
+function openChromeTab() {
+    var readMoreLink = $("openTab").readMoreLink;
+    if (readMoreLink) {
+        readMoreLink = readMoreLink.replace("m.wikipedia", "wikipedia");
+        chrome.tabs.create({
+            url: readMoreLink
+        });
+
+    }
 }
 
 function onCountryChange() {
@@ -137,6 +149,7 @@ function Holiday(holidayName, description, link, date) {
 
 function readMore() {
     $("nlwWebpage").src = this.readMoreLink;
+    $("openTab").readMoreLink = this.readMoreLink;
     var previousView = $("nlwWrapper").style.display == "none" ? "tableWrapper" : "nlwWrapper"
     swapView(previousView, "webContainer");
     $("webBackBtn").previousView = previousView;

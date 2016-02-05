@@ -48,6 +48,10 @@ function init() {
     $("webBackBtn").onclick = function () {
         $("nlwWebpage").src = "";
         swapView("webContainer", this.previousView);
+    };
+    $("applink").onclick = function () {
+        $("openTab").readMoreLink = "https://play.google.com/store/apps/details?id=com.jobinbasani.nlw";
+        openChromeTab();
     }
     setReadMoreLinks();
     showLongWeekendForCountry(selectedCountry);

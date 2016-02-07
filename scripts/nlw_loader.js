@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function init() {
     var options = [],
         index = 0,
-        selectedCountry = localStorage.selectedCountry || "USA",
+        selectedCountry = getSelectedCountryFromDb(),
         counter = 0,
         countrySelect = $("countrySelect");
     for (var country in holidayNames) {
@@ -60,6 +60,10 @@ function init() {
 function swapView(currentView, newView) {
     $(currentView).style.display = 'none';
     $(newView).style.display = 'block';
+}
+
+function getSelectedCountryFromDb() {
+    return localStorage.selectedCountry || "USA";
 }
 
 function setReadMoreLinks() {
@@ -160,7 +164,17 @@ function readMore() {
 }
 
 function getDaysToGo(holiday) {
-    return Math.round((holiday.getTime() - Date.today().getTime()) / (86400000));
+    if(holiday){
+        return Math.round((holiday.getTime() - Date.today().getTime()) / (86400000));
+    }
+    else{
+        var country = getSelectedCountryFromDb();
+        if(!countryData.hasOwnProperty(country)){
+            countryData[country] = new LongWeekend(holidayNames[country]);
+        }
+        var nlw = countryData[country].getNextLongWeekend.call(countryData[country]);
+        return getDaysToGo(nlw.date);
+    }
 }
 
 LongWeekend.prototype.getHolidays = function () {
